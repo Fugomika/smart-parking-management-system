@@ -1,62 +1,132 @@
 # Smart Parking Management System (SPMS)
 
-Sistem Manajemen Parkir Pintar berbasis desktop yang dibangun menggunakan **Java Swing (GUI)** dengan menerapkan prinsip Object-Oriented Programming (OOP). Proyek ini dirancang untuk mempermudah pemantauan slot parkir, proses check-in/check-out kendaraan, perhitungan tarif parkir otomatis berdasarkan jenis kendaraan dan durasi, serta pelaporan pendapatan.
+Tugas Besar - Pemrograman Berorientasi Objek  
+Semester Genap 2025/2026 | Program Studi S1 PJJ Informatika  
+Universitas Telkom
 
 ---
 
-## 🚀 Fitur Utama
+## Anggota Kelompok 6
 
-- **Real-time Slot Visualizer**: Visualisasi slot parkir interaktif (Warna hijau menunjukkan slot tersedia, warna merah menunjukkan slot terisi).
-- **Manajemen Kendaraan (Mobil & Motor)**: Pengelompokan jenis kendaraan dengan tarif parkir yang disesuaikan secara dinamis.
-- **Proses Check-In & Check-Out Cepat**:
-  - **Check-In**: Menghasilkan tiket unik dengan ID otomatis setelah mengalokasikan slot parkir yang kosong.
-  - **Check-Out**: Mencari tiket berdasarkan ID Tiket atau Nomor Plat Kendaraan, menghitung durasi parkir (bulat ke atas per jam), menghitung tarif, dan memproses pembayaran.
-- **Metode Pembayaran**: Struktur kode yang modular untuk metode pembayaran (saat ini mendukung pembayaran tunai/Cash).
-- **Laporan & Riwayat**: Dashboard laporan yang menampilkan riwayat lengkap kendaraan masuk-keluar beserta total pendapatan (revenue) yang diperoleh secara real-time.
-
----
-
-## 🛠️ Arsitektur Proyek (OOP & Desain)
-
-Proyek ini dirancang menggunakan arsitektur MVC sederhana berbasis OOP:
-- **`com.spms.model`**: Berisi objek data seperti `Vehicle` (dan sub-class-nya `Car` dan `Motorcycle`), `ParkingSlot`, dan `ParkingTicket`.
-- **`com.spms.payment`**: Mengimplementasikan interface `PaymentMethod` (misalnya `CashPayment`) untuk menangani proses pembayaran secara fleksibel.
-- **`com.spms.gui`**: Komponen visual utama menggunakan Java Swing (`MainFrame`, `CheckInPanel`, `CheckOutPanel`, `SlotPanel`, `ReportPanel`).
-- **`com.spms.system`**: Engine utama (`ParkingSystem`) yang menangani alokasi memori, daftar slot aktif, penghitungan tarif, dan pencatatan riwayat transaksi.
+| Nama | NIM |
+|------|-----|
+| Arya Putra Nugroho | 103042310071 |
+| Azzam Rafi Zafran | 103042400032 |
+| Abdurrahman Farras Fadhila | 103042310070 |
+| Chiqa Maharani | 103042400038 |
+| Yuliana Mutia | 103042400041 |
 
 ---
 
-## 💻 Cara Menjalankan Proyek
+## Deskripsi
 
-### 1. Menggunakan NetBeans IDE (Sangat Direkomendasikan)
+SPMS adalah aplikasi berbasis Java yang mengelola parkir kendaraan secara digital, mencakup:
+- Pencatatan kendaraan masuk dan keluar
+- Manajemen slot parkir otomatis
+- Perhitungan biaya parkir berdasarkan durasi
+- Sistem pembayaran tunai
+- Laporan riwayat dan total pendapatan
+
+---
+
+## Teknologi
+
+- **Backend** : Java (OOP)
+- **Frontend** : Java Swing
+- **IDE** : NetBeans / IntelliJ IDEA
+
+---
+
+## Struktur Proyek
+
+```
+src/
+└── com/spms/
+    ├── Main.java                  # Entry point
+    ├── model/
+    │   ├── Vehicle.java           # Abstract class kendaraan
+    │   ├── Car.java               # Subclass mobil (Rp 5.000/jam)
+    │   ├── Motorcycle.java        # Subclass motor (Rp 2.000/jam)
+    │   ├── ParkingSlot.java       # Manajemen slot parkir
+    │   └── ParkingTicket.java     # Data tiket transaksi
+    ├── payment/
+    │   ├── PaymentMethod.java     # Interface pembayaran
+    │   └── CashPayment.java       # Implementasi pembayaran tunai
+    ├── system/
+    │   └── ParkingSystem.java     # Controller utama (checkIn / checkOut)
+    └── gui/
+        ├── MainFrame.java         # Jendela utama
+        ├── CheckInPanel.java      # Tab kendaraan masuk
+        ├── CheckOutPanel.java     # Tab kendaraan keluar
+        ├── SlotPanel.java         # Tab status slot
+        └── ReportPanel.java       # Tab laporan
+```
+
+---
+
+## Konsep OOP yang Digunakan
+
+| Konsep | Implementasi |
+|--------|-------------|
+| **Abstraction** | `Vehicle` sebagai abstract class dengan method `calculateParkingFee()` |
+| **Inheritance** | `Car` dan `Motorcycle` mewarisi `Vehicle` |
+| **Polymorphism** | `calculateParkingFee()` di-override di `Car` dan `Motorcycle` |
+| **Interface** | `PaymentMethod` diimplementasikan oleh `CashPayment` |
+| **Encapsulation** | Atribut private/protected dengan getter/setter |
+
+---
+
+## Cara Menjalankan
+
+### Prasyarat
+- Java JDK 11 atau lebih baru
+- NetBeans IDE atau Apache Ant
+
+### Melalui NetBeans IDE
 1. Buka **NetBeans IDE**.
-2. Pilih **File** -> **Open Project**.
-3. Arahkan ke folder proyek ini (`SmartParking`).
-4. Klik kanan pada proyek **SmartParking** di panel Projects, kemudian pilih **Run**.
+2. Pilih menu **File** -> **Open Project**.
+3. Cari dan pilih folder **SmartParking** ini.
+4. Klik kanan pada nama project **SmartParking**, lalu pilih **Run** (atau tekan tombol **F6**).
 
-### 2. Menggunakan Command Line (CLI) dengan Apache Ant
-Pastikan Anda sudah menginstal JDK dan Apache Ant di sistem Anda.
-1. Buka terminal/command prompt pada direktori utama proyek.
-2. Jalankan perintah berikut untuk mengompilasi dan menjalankan program:
+### Melalui Command Line (Apache Ant)
+1. Buka terminal atau Command Prompt di direktori utama proyek.
+2. Jalankan perintah berikut untuk compile dan menjalankan program:
    ```bash
    ant run
    ```
 
 ---
 
-## 📄 Struktur Folder Proyek
-```text
-SmartParking/
-├── build.xml               # Konfigurasi build Apache Ant
-├── manifest.mf             # Manifest file untuk JAR bundling
-├── nbproject/              # Konfigurasi proyek NetBeans
-├── src/                    # Source code Java
-│   └── com/
-│       └── spms/
-│           ├── Main.java              # Entry point utama program
-│           ├── gui/                   # Paket untuk komponen UI Swing
-│           ├── model/                 # Kelas representasi entitas (OOP)
-│           ├── payment/               # Manajemen metode pembayaran
-│           └── system/                # Logika sistem parkir utama
-└── .gitignore              # Mengabaikan folder build/ & file konfigurasi privat
-```
+## Fitur Aplikasi
+
+### Kendaraan Masuk
+- Input plat nomor
+- Pilih jenis kendaraan (Mobil / Motor)
+- Sistem menentukan slot parkir otomatis
+- Cetak tiket parkir beserta ID tiket
+
+### Kendaraan Keluar
+- Cari kendaraan berdasarkan **Tiket ID** atau **Plat Nomor**
+- Hitung durasi parkir (minimum 1 jam)
+- Hitung biaya otomatis sesuai jenis kendaraan
+- Proses pembayaran tunai dan tampilkan kembalian
+
+### Status Slot
+- Visualisasi grid semua slot parkir
+- Warna **hijau** = kosong, **merah** = terisi
+- Tampilkan plat kendaraan di slot yang terisi
+
+### Laporan
+- Riwayat seluruh transaksi parkir
+- Total pendapatan kumulatif
+
+---
+
+## Tarif Parkir
+
+| Jenis Kendaraan | Tarif |
+|-----------------|-------|
+| Mobil | Rp 5.000 / jam |
+| Motor | Rp 2.000 / jam |
+
+> Minimum parkir: **1 jam**
