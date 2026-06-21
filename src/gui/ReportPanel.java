@@ -1,7 +1,7 @@
-package com.spms.gui;
+﻿package gui;
 
-import com.spms.system.ParkingSystem;
-import com.spms.system.ParkingSystem.ParkingRecord;
+import system.ParkingSystem;
+import system.ParkingSystem.ParkingRecord;
 
 import javax.swing.*;
 import javax.swing.border.*;

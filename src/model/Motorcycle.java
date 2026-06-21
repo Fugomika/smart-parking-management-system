@@ -1,4 +1,4 @@
-package com.spms.model;
+﻿package model;
 
 public class Motorcycle extends Vehicle {
     public static final double RATE_PER_HOUR = 2000;

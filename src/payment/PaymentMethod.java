@@ -1,4 +1,4 @@
-package com.spms.payment;
+﻿package payment;
 
 public interface PaymentMethod {
     void processPayment(double amount);

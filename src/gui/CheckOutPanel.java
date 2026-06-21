@@ -1,9 +1,9 @@
-package com.spms.gui;
+﻿package gui;
 
-import com.spms.model.ParkingTicket;
-import com.spms.payment.CashPayment;
-import com.spms.system.ParkingSystem;
-import com.spms.system.ParkingSystem.CheckOutResult;
+import model.ParkingTicket;
+import payment.CashPayment;
+import system.ParkingSystem;
+import system.ParkingSystem.CheckOutResult;
 
 import javax.swing.*;
 import javax.swing.border.*;

@@ -1,4 +1,4 @@
-package com.spms.model;
+﻿package model;
 
 public abstract class Vehicle {
     protected String licensePlate;

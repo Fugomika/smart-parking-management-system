@@ -1,4 +1,4 @@
-package com.spms.model;
+﻿package model;
 
 public class ParkingSlot {
     private int slotNumber;

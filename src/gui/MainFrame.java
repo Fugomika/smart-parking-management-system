@@ -1,6 +1,6 @@
-package com.spms.gui;
+﻿package gui;
 
-import com.spms.system.ParkingSystem;
+import system.ParkingSystem;
 
 import javax.swing.*;
 import java.awt.*;

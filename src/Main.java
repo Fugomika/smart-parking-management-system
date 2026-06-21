@@ -1,7 +1,7 @@
-package com.spms;
+﻿
 
-import com.spms.gui.MainFrame;
-import com.spms.system.ParkingSystem;
+import gui.MainFrame;
+import system.ParkingSystem;
 
 import javax.swing.*;
 

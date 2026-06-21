@@ -1,7 +1,7 @@
-package com.spms.system;
+﻿package system;
 
-import com.spms.model.*;
-import com.spms.payment.*;
+import model.*;
+import payment.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
