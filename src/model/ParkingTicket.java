@@ -18,6 +18,13 @@ public class ParkingTicket {
         this.slotNumber = slotNumber;
     }
 
+    public ParkingTicket(Vehicle vehicle, int slotNumber, String ticketId, long entryTime) {
+        this.ticketId = ticketId;
+        this.vehicle = vehicle;
+        this.entryTime = entryTime;
+        this.slotNumber = slotNumber;
+    }
+
     public void printTicketDetails() {
         System.out.println("============================");
         System.out.println("      TIKET PARKIR SPMS     ");

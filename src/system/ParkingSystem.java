@@ -2,6 +2,7 @@ package system;
 
 import model.*;
 import payment.*;
+import db.DatabaseManager;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,11 +17,27 @@ public class ParkingSystem {
 
     public ParkingSystem(int totalSlots) {
         slots = new ArrayList<>();
-        activeTickets = new LinkedHashMap<>();
-        history = new ArrayList<>();
-        totalRevenue = 0;
+        try {
+            DatabaseManager.initDatabase();
+            activeTickets = DatabaseManager.loadActiveTickets();
+            history = DatabaseManager.loadHistory();
+            totalRevenue = DatabaseManager.loadTotalRevenue();
+        } catch (Exception e) {
+            e.printStackTrace();
+            activeTickets = new LinkedHashMap<>();
+            history = new ArrayList<>();
+            totalRevenue = 0;
+        }
+
         for (int i = 1; i <= totalSlots; i++) {
-            slots.add(new ParkingSlot(i));
+            ParkingSlot slot = new ParkingSlot(i);
+            for (ParkingTicket ticket : activeTickets.values()) {
+                if (ticket.getSlotNumber() == i) {
+                    slot.assignVehicle(ticket.getVehicle());
+                    break;
+                }
+            }
+            slots.add(slot);
         }
     }
 
@@ -35,6 +52,7 @@ public class ParkingSystem {
 
         slot.assignVehicle(vehicle);
         ParkingTicket ticket = new ParkingTicket(vehicle, slot.getSlotNumber());
+        DatabaseManager.saveActiveTicket(ticket);
         activeTickets.put(ticket.getTicketId(), ticket);
         return ticket;
     }
@@ -59,12 +77,25 @@ public class ParkingSystem {
         }
 
         totalRevenue += fee;
+        String exitTimeStr = SDF.format(new Date(now));
+        
+        DatabaseManager.removeActiveTicket(ticketId);
+        DatabaseManager.saveParkingRecord(
+            ticket.getTicketId(),
+            ticket.getVehicle().toString(),
+            ticket.getSlotNumber(),
+            ticket.getFormattedEntryTime(),
+            exitTimeStr,
+            hours,
+            fee
+        );
+
         history.add(new ParkingRecord(
             ticket.getTicketId(),
             ticket.getVehicle().toString(),
             ticket.getSlotNumber(),
             ticket.getFormattedEntryTime(),
-            SDF.format(new Date(now)),
+            exitTimeStr,
             hours,
             fee
         ));
