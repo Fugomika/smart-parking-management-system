@@ -1,4 +1,4 @@
-﻿package gui;
+package gui;
 
 import model.ParkingSlot;
 import system.ParkingSystem;

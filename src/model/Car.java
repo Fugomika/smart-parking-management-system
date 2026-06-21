@@ -1,4 +1,4 @@
-﻿package model;
+package model;
 
 public class Car extends Vehicle {
     public static final double RATE_PER_HOUR = 5000;

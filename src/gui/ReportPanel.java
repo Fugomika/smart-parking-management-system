@@ -1,4 +1,4 @@
-﻿package gui;
+package gui;
 
 import system.ParkingSystem;
 import system.ParkingSystem.ParkingRecord;

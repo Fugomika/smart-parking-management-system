@@ -1,4 +1,4 @@
-﻿package payment;
+package payment;
 
 public class CashPayment implements PaymentMethod {
     private double cashGiven;
