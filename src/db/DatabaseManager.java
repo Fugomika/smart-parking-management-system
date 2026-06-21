@@ -8,7 +8,7 @@ import java.util.*;
 
 public class DatabaseManager {
 
-    private static final String URL  = "jdbc:mysql://localhost:3306/spms_db?useSSL=false&serverTimezone=Asia/Jakarta&allowPublicKeyRetrieval=true";
+    private static final String URL  = "jdbc:mysql://localhost:3306/spms_db?useSSL=false&serverTimezone=Asia/Jakarta&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true";
     private static final String USER = "root";
     private static final String PASS = "";   // sesuaikan password MySQL kamu
 
