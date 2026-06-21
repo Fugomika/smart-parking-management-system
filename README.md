@@ -41,25 +41,24 @@ SPMS adalah aplikasi berbasis Java yang mengelola parkir kendaraan secara digita
 
 ```
 src/
-└── com/spms/
-    ├── Main.java                  # Entry point
-    ├── model/
-    │   ├── Vehicle.java           # Abstract class kendaraan
-    │   ├── Car.java               # Subclass mobil (Rp 5.000/jam)
-    │   ├── Motorcycle.java        # Subclass motor (Rp 2.000/jam)
-    │   ├── ParkingSlot.java       # Manajemen slot parkir
-    │   └── ParkingTicket.java     # Data tiket transaksi
-    ├── payment/
-    │   ├── PaymentMethod.java     # Interface pembayaran
-    │   └── CashPayment.java       # Implementasi pembayaran tunai
-    ├── system/
-    │   └── ParkingSystem.java     # Controller utama (checkIn / checkOut)
-    └── gui/
-        ├── MainFrame.java         # Jendela utama
-        ├── CheckInPanel.java      # Tab kendaraan masuk
-        ├── CheckOutPanel.java     # Tab kendaraan keluar
-        ├── SlotPanel.java         # Tab status slot
-        └── ReportPanel.java       # Tab laporan
+├── Main.java                  # Entry point
+├── model/
+│   ├── Vehicle.java           # Abstract class kendaraan
+│   ├── Car.java               # Subclass mobil (Rp 5.000/jam)
+│   ├── Motorcycle.java        # Subclass motor (Rp 2.000/jam)
+│   ├── ParkingSlot.java       # Manajemen slot parkir
+│   └── ParkingTicket.java     # Data tiket transaksi
+├── payment/
+│   ├── PaymentMethod.java     # Interface pembayaran
+│   └── CashPayment.java       # Implementasi pembayaran tunai
+├── system/
+│   └── ParkingSystem.java     # Controller utama (checkIn / checkOut)
+└── gui/
+    ├── MainFrame.java         # Jendela utama
+    ├── CheckInPanel.java      # Tab kendaraan masuk
+    ├── CheckOutPanel.java     # Tab kendaraan keluar
+    ├── SlotPanel.java         # Tab status slot
+    └── ReportPanel.java       # Tab laporan
 ```
 
 ---
