@@ -1,5 +1,6 @@
 package com.spms.system;
 
+import com.spms.db.DatabaseManager;
 import com.spms.model.*;
 import com.spms.payment.*;
 
@@ -19,9 +20,30 @@ public class ParkingSystem {
         activeTickets = new LinkedHashMap<>();
         history = new ArrayList<>();
         totalRevenue = 0;
+
         for (int i = 1; i <= totalSlots; i++) {
             slots.add(new ParkingSlot(i));
         }
+
+        DatabaseManager.initDatabase();
+        loadFromDatabase();
+    }
+
+    private void loadFromDatabase() {
+        // Muat tiket aktif → tandai slot yang terisi
+        activeTickets = DatabaseManager.loadActiveTickets();
+        for (ParkingTicket ticket : activeTickets.values()) {
+            for (ParkingSlot slot : slots) {
+                if (slot.getSlotNumber() == ticket.getSlotNumber()) {
+                    slot.assignVehicle(ticket.getVehicle());
+                    break;
+                }
+            }
+        }
+
+        // Muat riwayat dan total pendapatan
+        history = DatabaseManager.loadHistory();
+        totalRevenue = DatabaseManager.loadTotalRevenue();
     }
 
     public ParkingTicket checkIn(Vehicle vehicle) {
@@ -36,6 +58,9 @@ public class ParkingSystem {
         slot.assignVehicle(vehicle);
         ParkingTicket ticket = new ParkingTicket(vehicle, slot.getSlotNumber());
         activeTickets.put(ticket.getTicketId(), ticket);
+
+        DatabaseManager.saveActiveTicket(ticket);
+
         return ticket;
     }
 
@@ -59,7 +84,7 @@ public class ParkingSystem {
         }
 
         totalRevenue += fee;
-        history.add(new ParkingRecord(
+        ParkingRecord record = new ParkingRecord(
             ticket.getTicketId(),
             ticket.getVehicle().toString(),
             ticket.getSlotNumber(),
@@ -67,8 +92,15 @@ public class ParkingSystem {
             SDF.format(new Date(now)),
             hours,
             fee
-        ));
+        );
+        history.add(record);
         activeTickets.remove(ticketId);
+
+        DatabaseManager.saveParkingRecord(
+            record.ticketId, record.vehicle, record.slotNumber,
+            record.entryTime, record.exitTime, record.hours, record.fee
+        );
+        DatabaseManager.removeActiveTicket(ticketId);
 
         return new CheckOutResult(ticket, hours, fee, method);
     }
@@ -93,10 +125,10 @@ public class ParkingSystem {
         return null;
     }
 
-    public List<ParkingSlot> getSlots() { return slots; }
-    public Map<String, ParkingTicket> getActiveTickets() { return activeTickets; }
-    public List<ParkingRecord> getHistory() { return history; }
-    public double getTotalRevenue() { return totalRevenue; }
+    public List<ParkingSlot> getSlots()                          { return slots; }
+    public Map<String, ParkingTicket> getActiveTickets()         { return activeTickets; }
+    public List<ParkingRecord> getHistory()                      { return history; }
+    public double getTotalRevenue()                              { return totalRevenue; }
 
     public int getAvailableSlotCount() {
         int c = 0;
