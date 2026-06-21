@@ -95,6 +95,22 @@ src/
    ant run
    ```
 
+### Kompilasi (Manual)
+```bash
+bash compile.sh
+```
+
+### Jalankan (Manual)
+```bash
+bash run.sh
+```
+
+Atau manual:
+```bash
+javac -d out $(find src -name "*.java")
+java -cp out com.spms.Main
+```
+
 ---
 
 ## Fitur Aplikasi
