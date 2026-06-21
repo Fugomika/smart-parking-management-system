@@ -80,13 +80,27 @@ src/
 
 ### Prasyarat
 - Java JDK 11 atau lebih baru
+- NetBeans IDE atau Apache Ant
 
-### Kompilasi
+### Melalui NetBeans IDE
+1. Buka **NetBeans IDE**.
+2. Pilih menu **File** -> **Open Project**.
+3. Cari dan pilih folder **SmartParking** ini.
+4. Klik kanan pada nama project **SmartParking**, lalu pilih **Run** (atau tekan tombol **F6**).
+
+### Melalui Command Line (Apache Ant)
+1. Buka terminal atau Command Prompt di direktori utama proyek.
+2. Jalankan perintah berikut untuk compile dan menjalankan program:
+   ```bash
+   ant run
+   ```
+
+### Kompilasi (Manual)
 ```bash
 bash compile.sh
 ```
 
-### Jalankan
+### Jalankan (Manual)
 ```bash
 bash run.sh
 ```

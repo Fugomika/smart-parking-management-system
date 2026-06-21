@@ -5,6 +5,7 @@ out/
 # Build tools
 *.jar
 *.war
+/build/
 
 # IDE - IntelliJ IDEA
 .idea/
